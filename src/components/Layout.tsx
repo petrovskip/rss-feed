@@ -21,7 +21,7 @@ const Layout = (props: InjectionRSSProps<CustomRssHeaderProps, CustomRssItemProp
         }, 300), []);
 
     const searchCallback = (e: FormEvent<HTMLInputElement>) => {
-        debouncedFilter(e.currentTarget.value)
+        debouncedFilter(e.currentTarget.value.toLowerCase())
     }
 
     return(
