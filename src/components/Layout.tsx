@@ -3,6 +3,17 @@ import rssEnhancer, { InjectionRSSProps } from 'react-rss';
 import debounce from 'lodash.debounce';
 import FeedHeader, { CustomRssHeaderProps } from './FeedHeader';
 import FeedItem, { CustomRssItemProps } from './FeedItem';
+import { Standard2RSSFormatItem } from 'react-rss/types';
+
+export const searchFn = (items: (Standard2RSSFormatItem & CustomRssItemProps)[], query: string) => {
+    return items.filter(item => {
+        return (item.author.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query) ||
+                (item.categories && item.categories.some(category => category.toLowerCase().includes(query))) ||
+                item.title.toLowerCase().includes(query) ||
+                item.description.toLowerCase().includes(query));
+    })
+}
 
 
 
@@ -11,13 +22,7 @@ const Layout = (props: InjectionRSSProps<CustomRssHeaderProps, CustomRssItemProp
 
     const debouncedFilter = useCallback(debounce((query: string) => {
             if(!query) setSearchFeed(props.rss.items) ;
-            setSearchFeed(props.rss.items.filter(item => {
-                return (item.author.toLowerCase().includes(query) ||
-                        item.category.toLowerCase().includes(query) ||
-                        (item.categories && item.categories.some(category => category.toLowerCase().includes(query))) ||
-                        item.title.toLowerCase().includes(query) ||
-                        item.description.toLowerCase().includes(query));
-            }));
+            setSearchFeed(searchFn(props.rss.items, query));
         }, 300), []);
 
     const searchCallback = (query: string) => {
@@ -44,7 +49,6 @@ export default rssEnhancer(
         return { ...header, hasImage: Boolean(rss.image) };
     },
     (rssItem, item) => { // Enhances each item by json property
-        console.log(item);
         let result: any = {...item};
         if(Array.isArray(rssItem['category'])){
             const categories = rssItem['category'].map(category => category.text as string);
