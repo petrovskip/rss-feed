@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import FeedHeader from './components/FeedHeader';
+import FeedItem from './components/FeedItem';
 import { searchFn } from './components/Layout';
 
 const mockHeaderData ={
@@ -119,6 +120,15 @@ test('renders img in header link', () => {
   render(<FeedHeader {...mockHeaderData} />);
   const imgElement = screen.getByAltText(/dev98/i);
   expect(imgElement).toBeInTheDocument();
+});
+
+test('renders cards', () => {
+  mockItemData.forEach(item => {
+    render(<FeedItem {...item} />);
+  })
+  
+  const linkElements = screen.getAllByText(/Go to blog post/i);
+  expect(linkElements).toHaveLength(mockItemData.length);
 });
 
 describe('Search', () => {
