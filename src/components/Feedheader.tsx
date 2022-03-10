@@ -1,13 +1,26 @@
-import { FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 import { Form } from "react-bootstrap";
 import { Standard2RSSFormatHeader } from "react-rss/types";
 
 export type CustomRssHeaderProps = {
     hasImage: Boolean,
-    search: (e: FormEvent<HTMLInputElement>) => void
+    search: (query: string) => void
 }
 
 const FeedHeader = (props: Standard2RSSFormatHeader & CustomRssHeaderProps) => {
+
+    const searchQeury = useRef<HTMLInputElement>(null); 
+
+    const keyPressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.code === "Enter") {
+            event.preventDefault();
+            props.search((searchQeury.current?.value ? searchQeury.current.value : ""));
+        }
+      };
+
+    const inputHandler =  (event: FormEvent<HTMLInputElement>) => {
+        props.search((searchQeury.current?.value ? searchQeury.current.value : ""));
+    }
 
     return (
         <header className="blog-header py-3">
@@ -30,7 +43,7 @@ const FeedHeader = (props: Standard2RSSFormatHeader & CustomRssHeaderProps) => {
             <div>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" placeholder="Search..." onInput={props.search} />
+                        <Form.Control ref={searchQeury} type="text" placeholder="Search..." onKeyPress={keyPressHandler} onInput={inputHandler} />
                         <Form.Text className="text-muted">
                             Search for titles, descriptions, categories, authors
                         </Form.Text>

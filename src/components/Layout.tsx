@@ -20,8 +20,8 @@ const Layout = (props: InjectionRSSProps<CustomRssHeaderProps, CustomRssItemProp
             }));
         }, 300), []);
 
-    const searchCallback = (e: FormEvent<HTMLInputElement>) => {
-        debouncedFilter(e.currentTarget.value.toLowerCase())
+    const searchCallback = (query: string) => {
+        debouncedFilter(query.toLowerCase())
     }
 
     return(
