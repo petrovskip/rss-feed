@@ -30,7 +30,7 @@ const FeedHeader = (props: Standard2RSSFormatHeader & CustomRssHeaderProps) => {
                         {
                             props.hasImage &&
                             // @ts-ignore:next-line
-                            <img src={props.image?.url.text} />
+                            <img src={props.image?.url.text} alt={props.image?.title.text} />
                         }
                         {props.title} feed
                     </a>

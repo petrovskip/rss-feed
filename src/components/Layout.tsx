@@ -44,6 +44,7 @@ export default rssEnhancer(
         return { ...header, hasImage: Boolean(rss.image) };
     },
     (rssItem, item) => { // Enhances each item by json property
+        console.log(item);
         let result: any = {...item};
         if(Array.isArray(rssItem['category'])){
             const categories = rssItem['category'].map(category => category.text as string);
