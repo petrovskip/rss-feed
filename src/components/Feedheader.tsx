@@ -32,7 +32,7 @@ const FeedHeader = (props: Standard2RSSFormatHeader & CustomRssHeaderProps) => {
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control type="text" placeholder="Search..." onInput={props.search} />
                         <Form.Text className="text-muted">
-                            Search for titles, categories, authors
+                            Search for titles, descriptions, categories, authors
                         </Form.Text>
                     </Form.Group>
                 </Form>
@@ -41,4 +41,4 @@ const FeedHeader = (props: Standard2RSSFormatHeader & CustomRssHeaderProps) => {
     )
 };
 
-export default FeedHeader
+export default FeedHeader;

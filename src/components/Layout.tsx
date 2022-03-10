@@ -1,8 +1,8 @@
 import { FormEvent, useCallback, useState } from 'react';
 import rssEnhancer, { InjectionRSSProps } from 'react-rss';
 import debounce from 'lodash.debounce';
-import FeedHeader, { CustomRssHeaderProps } from './Feedheader';
-import Feeditem, { CustomRssItemProps } from './FeedItem';
+import FeedHeader, { CustomRssHeaderProps } from './FeedHeader';
+import FeedItem, { CustomRssItemProps } from './FeedItem';
 
 
 
@@ -29,7 +29,7 @@ const Layout = (props: InjectionRSSProps<CustomRssHeaderProps, CustomRssItemProp
             <FeedHeader {...props.rss.header} search={searchCallback} />
             <main>
                     {searchFeed.map((item, index) => (
-                        <Feeditem key={`item_${index}`} {...item} />
+                        <FeedItem key={`item_${index}`} {...item} />
                     ))}
             </main>
         </div>

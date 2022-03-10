@@ -7,7 +7,7 @@ export type CustomRssItemProps = {
     content?: string;
 }
 
-const Feeditem = (props: Standard2RSSFormatItem & CustomRssItemProps) => {
+const FeedItem = (props: Standard2RSSFormatItem & CustomRssItemProps) => {
     const [showInfo, setShowInfo] = useState(true);
 
     const renderWholePage = () => {
@@ -52,4 +52,4 @@ const Feeditem = (props: Standard2RSSFormatItem & CustomRssItemProps) => {
     );
 };
 
-export default Feeditem;
+export default FeedItem;
