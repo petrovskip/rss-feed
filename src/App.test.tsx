@@ -126,7 +126,7 @@ describe('Search', () => {
 
     const searchInput = "AJAX";
 
-    const filteredItems = searchFn(mockItemData, searchInput.toLowerCase());
+    const filteredItems = searchFn(mockItemData, searchInput);
 
     expect(filteredItems).toHaveLength(1);
   })

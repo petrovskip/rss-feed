@@ -6,12 +6,13 @@ import FeedItem, { CustomRssItemProps } from './FeedItem';
 import { Standard2RSSFormatItem } from 'react-rss/types';
 
 export const searchFn = (items: (Standard2RSSFormatItem & CustomRssItemProps)[], query: string) => {
+    const loweredQuery = query.toLowerCase();
     return items.filter(item => {
-        return (item.author.toLowerCase().includes(query) ||
-                item.category.toLowerCase().includes(query) ||
-                (item.categories && item.categories.some(category => category.toLowerCase().includes(query))) ||
-                item.title.toLowerCase().includes(query) ||
-                item.description.toLowerCase().includes(query));
+        return (item.author.toLowerCase().includes(loweredQuery) ||
+                item.category.toLowerCase().includes(loweredQuery) ||
+                (item.categories && item.categories.some(category => category.toLowerCase().includes(loweredQuery))) ||
+                item.title.toLowerCase().includes(loweredQuery) ||
+                item.description.toLowerCase().includes(loweredQuery));
     })
 }
 
@@ -26,7 +27,7 @@ const Layout = (props: InjectionRSSProps<CustomRssHeaderProps, CustomRssItemProp
         }, 300), []);
 
     const searchCallback = (query: string) => {
-        debouncedFilter(query.toLowerCase())
+        debouncedFilter(query)
     }
 
     return(
